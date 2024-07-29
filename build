@@ -1,0 +1,50 @@
+ 
+# 从YAML文件构建一个新的YOLOv8n模型，数据集从头开始训练一个新的YOLOv8n模型
+yolo detect train data=ultralytics/datasets/yolov8_dataset/data.yaml model=yolov8n.yaml epochs=100 imgsz=640
+ 
+# 从预训练的yolov8n.pt模型开始，使用月饼数据集进行训练
+yolo detect train data=ultralytics/datasets/data.yaml model=yolov8n.pt epochs=100 imgsz=640
+ 
+# 从YAML中构建一个新模型，将预训练的yolov8n.pt模型的权重转移到它，并使用数据集开始训练
+yolo detect train data=ultralytics/datasets/data.yaml model=yolov8n.yaml pretrained=yolov8n.pt epochs=100 imgsz=640
+
+
+
+
+
+
+100 epochs completed in 2.471 hours.
+Optimizer stripped from G:\yolo\ultralytics\runs\detect\train\weights\last.pt, 6.3MB
+Optimizer stripped from G:\yolo\ultralytics\runs\detect\train\weights\best.pt, 6.3MB
+
+Validating G:\yolo\ultralytics\runs\detect\train\weights\best.pt...
+Ultralytics YOLOv8.2.66 🚀 Python-3.8.19 torch-2.4.0+cpu CPU (12th Gen Intel Core(TM) i5-12600K)
+YOLOv8n summary (fused): 168 layers, 3,006,038 parameters, 0 gradients, 8.1 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 3/3 [00:06<0
+                   all         70        218      0.917      0.626      0.727      0.483
+         license-plate         70         84      0.931       0.69      0.783      0.506
+               vehicle         68        134      0.904      0.562      0.672      0.461
+Speed: 2.6ms preprocess, 84.6ms inference, 0.0ms loss, 0.5ms postprocess per image
+Results saved to G:\yolo\ultralytics\runs\detect\train
+💡 Learn more at https://docs.ultralytics.com/modes/train
+
+
+
+
+
+# 导入ultralytics的YOLO库
+from ultralytics import YOLO
+
+# 加载模型
+model = YOLO('runs/detect/train/weights/best.pt')  # 加载自定义的训练模型
+
+if __name__ == '__main__':
+
+    results = model.predict(
+        r"D:\ultralytics-main\ultralytics\datasets\original-license-plates\test\images\b9f5b9acf1777acf_jpg.rf.b92969d5c3738ece6a84dcd2d0ea3ce0.jpg",
+        save=True, imgsz=320, conf=0.5,device=0,iou=0.5)
+
+
+
+
+
