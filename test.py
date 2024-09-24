@@ -4,7 +4,8 @@ import torch
 from ultralytics import YOLO
 
 # 初始化 YOLOv8 模型
-model = YOLO('yolov8n.pt')  # 确保 yolov8n.pt 模型文件在当前目录或正确路径下
+model = YOLO('emotion.pt')  # 确保 yolov8n.pt 模型文件在当前目录或正确路径下
+# model = YOLO('yolov8n.pt')  # 确保 yolov8n.pt 模型文件在当前目录或正确路径下
 
 # 初始化摄像头
 cap = cv2.VideoCapture(0)
